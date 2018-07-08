@@ -15,12 +15,13 @@ class CreateContactpersonsTable extends Migration
     {
         Schema::create('contactpersons', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('client_id')->unsigned()->references('id')->on('clients');
             $table->string('name')->nullable();
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->nullable();
             $table->string('address')->nullable();
-            $table->tinyInteger('phone')->nullable();
-            $table->tinyInteger('mobile')->nullable();
-            $table->tinyInteger('fax')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('fax')->nullable();
             $table->string('skypeid')->nullable();
             $table->timestamps();
         });

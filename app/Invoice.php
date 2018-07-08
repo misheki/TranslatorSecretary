@@ -4,17 +4,25 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PurchaseOrder extends Model
+class Invoice extends Model
 {
+    //
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 
-        'po_num', 
+        'project_id', 
         'dated_at', 
+        'invoice_num', 
+        'payment_terms', 
+        'qty', 
+        'unit', 
+        'currency', 
+        'rate', 
+        'total_amount', 
+        'deposit_amount', 
         'file'
     ];
 
@@ -22,4 +30,5 @@ class PurchaseOrder extends Model
     {
         return $this->belongsTo('App\Project');
     }
+
 }

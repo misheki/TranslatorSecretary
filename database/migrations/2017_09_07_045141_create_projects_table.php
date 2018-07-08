@@ -15,27 +15,19 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('purchase_order_id')->unsigned()->references('id')->on('purchase_orders');
+            $table->integer('contact_person_id')->unsigned()->references('id')->on('contact_persons');     
             $table->string('code')->unique();
             $table->string('title')->nullable();
-            $table->dateTimeTz('invoicedate')->nullable();
-            $table->string('invoicenum')->nullable();
-            $table->string('invoiceurl')->nullable();
-            $table->string('endclient')->nullable();
+            $table->string('end_client')->nullable();
             $table->string('description')->nullable();
             $table->string('genre1')->nullable();
             $table->string('genre2')->nullable();
-            $table->string('sourcelanguage')->nullable();
-            $table->string('targetlanguage')->nullable();
-            $table->dateTimeTz('received')->nullable();
-            $table->dateTimeTz('deadline')->nullable();
-            $table->dateTimeTz('submitted')->nullable();
-            $table->tinyInteger('qty')->nullable();
-            $table->enum('unit', ['word', 'hour', 'page', 'lumpsum', 'min', 'fuzzy']);
-            $table->char('currency', 3)->nullable();
-            $table->float('rate', 3, 2)->nullable();
-            $table->float('totalamount', 6, 2)->nullable();
-            $table->float('depositamount', 6, 2)->nullable();
-            $table->string('paymentterm')->nullable();
+            $table->string('source_lang')->nullable();
+            $table->string('target_lang')->nullable();
+            $table->timestamp('received_at')->nullable();
+            $table->timestamp('deadline_at')->nullable();
+            $table->timestamp('submitted_at')->nullable();
             $table->boolean('featurethis')->nullable();
             $table->timestamps();
         });

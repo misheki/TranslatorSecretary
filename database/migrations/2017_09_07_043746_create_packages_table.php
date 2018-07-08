@@ -18,8 +18,8 @@ class CreatePackagesTable extends Migration
             $table->string('name')->nullable();
             $table->string('code')->unique();
             $table->string('description')->nullable();
-            $table->float('price', 3, 2)->nullable();
-            $table->enum('status', ['ACTIVE', 'EXPIRED'])->nullable();
+            $table->decimal('price', 8, 2)->nullable();
+            $table->char('status')->nullable(); //['A = ACTIVE', 'E = EXPIRED']
             $table->tinyInteger('duration')->comment('in months')->nullable();
             $table->timestamps();
         });

@@ -15,9 +15,10 @@ class CreateSubscriptionsTable extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('start')->nullable();
-            $table->date('end')->nullable();
-            $table->enum('status', ['active', 'expired', 'trial'])->nullable();
+            $table->integer('user_id')->unsigned()->references('id')->on('users');
+            $table->integer('package_id')->unsigned()->references('id')->on('packages');
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });
     }

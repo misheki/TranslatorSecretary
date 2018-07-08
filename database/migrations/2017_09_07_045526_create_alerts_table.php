@@ -15,11 +15,12 @@ class CreateAlertsTable extends Migration
     {
         Schema::create('alerts', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['deadline', 'start', 'invoice', 'payment1', 'payment2'])->nullable();
+            $table->integer('user_id')->unsigned()->references('id')->on('users');
+            $table->string('type')->nullable(); // ['deadline', 'start', 'invoice', 'payment1', 'payment2']
             $table->string('message')->nullable()->comment('Example: Deadline of Project Title on Project Due Date.  You have x days/hours left.');
-            $table->dateTimeTz('expiry')->nullable()->comment('When the alert should go off.');
-            $table->dateTimeTz('consumed')->nullable()->comment('When the alert actually was seen');
-            $table->enum('status', ['active', 'expired'])->nullable();
+            $table->timestamp('expiry')->nullable()->comment('When the alert should go off.');
+            $table->timestamp('consumed')->nullable()->comment('When the alert actually was seen');
+            $table->string('status')->nullable(); // ['active', 'expired']
             $table->timestamps();
         });
     }

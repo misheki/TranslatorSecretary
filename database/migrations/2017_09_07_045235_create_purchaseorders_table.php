@@ -15,9 +15,10 @@ class CreatePurchaseordersTable extends Migration
     {
         Schema::create('purchaseorders', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->references('id')->on('users');
             $table->string('po_num')->nullable();
-            $table->date('issue_date')->nullable();
-            $table->string('url')->nullable();
+            $table->timestamp('dated_at')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }
