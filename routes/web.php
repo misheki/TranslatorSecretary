@@ -21,4 +21,5 @@ Route::get('/pricing', 'PagesController@pricing');
 //member pages
 
 Auth::routes();
-Route::get('/home', 'DashboardController@index');
+Route::resource('clients','ClientController');
+

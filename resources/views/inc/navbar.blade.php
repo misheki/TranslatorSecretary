@@ -22,12 +22,19 @@
                 &nbsp;
             </ul>
 
+            @if (Auth::guest())
             <ul class="nav navbar-nav">
               <li><a href="/">Home</a></li>
               <li><a href="/about">About</a></li>
               <li><a href="/features">Features</a></li>
               <li><a href="/pricing">Pricing</a></li>
             </ul>
+            @else
+            <ul class="nav navbar-nav">
+              <li><a href="{{ route('clients') }}">Clients</a></li>
+              <li><a href="{{ route('clients') }}">Projects</a></li>
+            </ul>
+            @endif
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
