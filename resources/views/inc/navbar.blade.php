@@ -11,9 +11,15 @@
             </button>
 
             <!-- Branding Image -->
+            @if (Auth::guest())
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
+            @else
+            <a class="navbar-brand" href="{{ url('/home') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            @endif
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -31,8 +37,9 @@
             </ul>
             @else
             <ul class="nav navbar-nav">
-              <li><a href="{{ route('clients') }}">Clients</a></li>
-              <li><a href="{{ route('clients') }}">Projects</a></li>
+              <li><a href="{{ route('clients.index') }}">Clients</a></li>
+              <li><a href="">Projects</a></li>
+              <li><a href="">Invoices</a></li>
             </ul>
             @endif
 

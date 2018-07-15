@@ -6,15 +6,13 @@
 
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Clients</h2>
-            </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('clients.create') }}"> Create New Product</a>
             </div>
         </div>
     </div>
 
+    <div class="row"><br><br><br> </div>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
