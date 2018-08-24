@@ -52,7 +52,7 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'code' => 'required|unique',
+            'code' => 'required|unique:clients',
             'name' => 'required',
             'email' => 'nullable|email',
             'website' => 'nullable|url'
