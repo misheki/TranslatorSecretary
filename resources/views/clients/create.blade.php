@@ -60,7 +60,7 @@
 
     <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
         {!! Form::label('Website:') !!}
-        {!! Form::text('website', old('website'), ['class'=>'form-control', 'readonly'=>'true']) !!}
+        {!! Form::text('website', old('website'), ['class'=>'form-control', 'placeholder'=>'Website']) !!}
         <span class="text-danger">{{ $errors->first('website') }}</span>
     </div>
 

@@ -27,7 +27,6 @@
             <th>Name</th>
             <th>Code</th>
             <th>Email</th>
-            <th>Website</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($clients as $client)
@@ -35,6 +34,7 @@
             <td>{{ ++$i }}</td>
             <td>{{ $client->name }}</td>
             <td>{{ $client->code }}</td>
+            <td>{{ $client->email }}</td>
             <td>
                 <form action="{{ route('clients.destroy',$client->id) }}" method="POST">
 

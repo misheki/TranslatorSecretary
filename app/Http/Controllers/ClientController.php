@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Client;
 use App\ContactPerson;
 
@@ -51,11 +52,21 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'code' => 'required',
+            'code' => 'required|unique',
             'name' => 'required',
+            'email' => 'nullable|email',
+            'website' => 'nullable|url'
         ]);
 
-        Client::create($request->all());
+        Client::create([
+            'user_id' => Auth::id(),
+            'code' => $request->code,
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'country' => $request->country,
+            'website' => $request->website
+        ]);
 
         return redirect()->route('clients.index')
                         ->with('success','Client created successfully.');
