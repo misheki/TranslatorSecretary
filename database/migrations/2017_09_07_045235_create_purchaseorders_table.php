@@ -13,7 +13,7 @@ class CreatePurchaseordersTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchaseorders', function (Blueprint $table) {
+        Schema::create('purchase_orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->references('id')->on('users');
             $table->string('po_num')->nullable();
@@ -30,6 +30,6 @@ class CreatePurchaseordersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchaseorders');
+        Schema::dropIfExists('purchase_orders');
     }
 }

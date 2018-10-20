@@ -7,9 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Client;
 use App\ContactPerson;
 
-class ClientController extends Controller
+class ContactPersonController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
@@ -25,11 +24,12 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($client_id)
     {
-        $clients = Auth::user()->clients()->latest()->paginate(10);
+        $client = Auth::user()->clients()->where('id', $client_id)->first();
+        $contactpersons = $client->contactpersons()->latest()->paginate(10);
 
-        return view('clients.index', compact('clients'))
+        return view('contactpersons.index', compact('client', 'contactpersons'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -38,9 +38,9 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($client_id)
     {
-        return view('clients.create');
+        return view('contactpersons.create', compact('client_id'));
     }
 
     /**
@@ -52,24 +52,25 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'code' => 'required|unique:clients',
             'name' => 'required',
-            'email' => 'nullable|email',
-            'website' => 'nullable|url'
+            'email' => 'nullable|email'
         ]);
 
-        Client::create([
-            'user_id' => Auth::id(),
-            'code' => $request->code,
+        $client_id = $request->client_id;
+
+        ContactPerson::create([
+            'client_id' => $request->client_id,
             'name' => $request->name,
             'email' => $request->email,
             'address' => $request->address,
-            'country' => $request->country,
-            'website' => $request->website
+            'phone' => $request->phone,
+            'mobile' => $request->mobile,
+            'fax' => $request->fax,
+            'skypeid' => $request->skypeid,
         ]);
 
-        return redirect()->route('clients.index')
-                        ->with('success','Client created successfully.');
+        return redirect()->route('contactpersons.index', compact('client_id'))
+                        ->with('success','Contact person created successfully.');
     }
 
     /**
@@ -80,8 +81,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
-        return view('clients.show',compact('client'));
+        //
     }
 
     /**
@@ -92,8 +92,7 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $client = Client::find($id);
-        return view('clients.edit',compact('client'));
+        //
     }
 
     /**
@@ -103,20 +102,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update(Request $request, $id)
     {
-        request()->validate([
-            'code' => 'required|unique:clients,code,' . $id,
-            'name' => 'required',
-            'email' => 'nullable|email',
-            'website' => 'nullable|url'
-        ]);
-
-        $client = Client::find($id);
-        $client->update($request->all());
-
-        return redirect()->route('clients.index')
-                        ->with('success','Client updated successfully');
+        //
     }
 
     /**
@@ -127,10 +115,6 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $client = Client::find($id);
-        $client->delete();
-
-        return redirect()->route('clients.index')
-                        ->with('success','Client deleted successfully');
+        //
     }
 }

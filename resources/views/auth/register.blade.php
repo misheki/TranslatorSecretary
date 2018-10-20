@@ -96,7 +96,7 @@
                                     'Sarawak' => 'SK',
                                     'Selangor' => 'SL',
                                     'Terengganu' => 'TE',
-                                  ], null, ['placeholder' => 'Select...']); }}
+                                  ], null, ['placeholder' => 'Select...']) }}
 
                                 @if ($errors->has('address'))
                                     <span class="help-block">

@@ -23,4 +23,8 @@ Route::get('/pricing', 'PagesController@pricing');
 Auth::routes();
 Route::get('/home', 'DashboardController@home');
 Route::resource('clients','ClientController');
+Route::resource('contactpersons','ContactPersonController')->except(['index', 'create']);
+Route::get('/contactpersons/list/{client_id}','ContactPersonController@index')->name('contactpersons.index');
+Route::get('/contactpersons/create/{client_id}','ContactPersonController@create')->name('contactpersons.create');
 
+Route::get('/home', 'HomeController@index')->name('home');

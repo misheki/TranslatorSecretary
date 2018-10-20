@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container">
-    <h2>Clients</h2><br/>
+    <h2>Contact Persons</h2><br/>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Add New Client</h2>
+                <h2>Edit Contact Person</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('clients.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('contactpersons.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -25,11 +25,11 @@
         </div>
     @endif
 
-    {!! Form::open(['route'=>'clients.store']) !!}
+    {{ Form::model($contactperson, ['route' => ['contactpersons.update', $contactperson->id], 'method' => 'patch']) }}
     @csrf
-    @include('inc.clientform')
+    @include('inc.contactpersonform')
     <div class="form-group">
-        <button class="btn btn-success">Save New Client</button>
+        <button class="btn btn-success">Save Contact Person</button>
     </div>
     {!! Form::close() !!}
 

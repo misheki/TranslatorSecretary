@@ -41,4 +41,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Project');
     }
+
+    /**
+     * Get all of the contact persons for the user.
+     */
+    public function contactpersons()
+    {
+        return $this->hasManyThrough('App\ContactPerson', 'App\Client');
+    }
 }
